@@ -91,12 +91,12 @@ Rails.application.configure do
 
   # devise setup
   config.action_mailer.default_url_options = { host: 'https://warm-basin-85336.herokuapp.com' }
-  # config.action_mailer.delivery_method = :smtp
-  # config.action_mailer.smtp_settings = {
-  #   :address => 'smtp.gmail.com',
-  #   :port => 587,
-  #   :authentication => :plain,
-  #   :user_name => Settings.gmail[:user_name],
-  #   :password => Settings.gmail[:password]
-  # }
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.smtp_settings = {
+    :address => 'smtp.gmail.com',
+    :port => 587,
+    :authentication => :plain,
+    :user_name => Settings.gmail[:user_name],
+    :password => Settings.gmail[:password]
+  }
 end

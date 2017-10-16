@@ -11,6 +11,10 @@ h2 Edit = resource_name.to_s.humanize
     .alert.alert-warning Currently waiting confirmation for: = resource.unconfirmed_email
 
   .form-group
+    = f.label :username
+    = f.text_field :username, class: "form-control"
+
+  .form-group
     => f.label :password
     i
       | (leave blank if you don't want to change it)

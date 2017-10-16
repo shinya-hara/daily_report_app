@@ -7,13 +7,14 @@
           li = message
 
   .form-group
-    = f.label :title
-    = f.text_field :title, class: "form-control"
-  .form-group
     = f.label :date
     .form-row
       = f.date_field :date, value: Time.current.strftime("%Y-%m-%d"), class: 'form-control'
+
   .form-group
     = f.label :content
     = f.text_area :content, class: "form-control"
+
+  = f.hidden_field :user_id, value: current_user.id
+
   = f.submit class: "btn btn-primary"

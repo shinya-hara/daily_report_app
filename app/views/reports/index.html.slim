@@ -3,8 +3,8 @@ h1 Listing reports
 table.table
   thead
     tr
-      th Title
       th Date
+      th User
       th Content
       th
       th
@@ -13,8 +13,8 @@ table.table
   tbody
     - @reports.each do |report|
       tr
-        td = report.title
         td = report.date
+        td = User.find_by(id: report.user_id).username
         td = report.content
         td = link_to 'Show', report
         td = link_to 'Edit', edit_report_path(report)

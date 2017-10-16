@@ -59,7 +59,7 @@ Rails.application.configure do
     :address => 'smtp.gmail.com',
     :port => 587,
     :authentication => :plain,
-    :user_name => 'msc.ixb.appa.v@gmail.com',
-    :password => 'wqeoqaiiokgmebmn'
+    :user_name => Settings.gmail[:user_name],
+    :password => Settings.gmail[:password]
   }
 end

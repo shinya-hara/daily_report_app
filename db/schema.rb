@@ -10,15 +10,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171016083226) do
+ActiveRecord::Schema.define(version: 20171017114544) do
 
   create_table "reports", force: :cascade do |t|
-    t.date "date"
-    t.text "content"
+    t.date "date", null: false
+    t.text "content", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "user_id"
-    t.index ["user_id"], name: "index_reports_on_user_id"
+    t.index ["user_id", "date"], name: "index_reports_on_user_id_and_date", unique: true
   end
 
   create_table "users", force: :cascade do |t|

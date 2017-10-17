@@ -8,17 +8,8 @@ html
     = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
 
   body
+    == render 'shared/header'
     .container
-      - if user_signed_in?
-        strong => link_to current_user.email, root_path
-        => link_to 'プロフィール変更', edit_user_registration_path
-        = link_to 'ログアウト', destroy_user_session_path, method: :delete
-        - if current_user.admin?
-          =< link_to '管理者画面', rails_admin_path
-      - else
-        => link_to 'サインアップ', new_user_registration_path
-        = link_to 'ログイン', new_user_session_path
-
       - if notice
         .alert.alert-info = notice
       - if alert

@@ -30,9 +30,19 @@ class Ability
     # https://github.com/CanCanCommunity/cancancan/wiki/Defining-Abilities
 
     user ||= User.new
-    if user && user.admin?
+
+    # default permission
+    cannot [:create, :update, :delete], Report
+    can :read, Report
+
+    if user.admin?
       can :access, :rails_admin
       can :manage, :all
+    end
+
+    # ログインしている場合
+    if user.id?
+      can [:create, :update, :delete], Report
     end
   end
 end

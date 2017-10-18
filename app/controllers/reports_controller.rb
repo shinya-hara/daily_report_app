@@ -1,10 +1,12 @@
 class ReportsController < ApplicationController
   before_action :set_report, only: [:show, :edit, :update, :destroy]
+  load_and_authorize_resource
 
   # GET /reports
   # GET /reports.json
   def index
     @reports = Report.all
+    @user = current_user || User.new
   end
 
   # GET /reports/1
@@ -14,11 +16,16 @@ class ReportsController < ApplicationController
 
   # GET /reports/new
   def new
-    @report = Report.new
+    # reportの新規作成時は report.user_id: current_user.id, report.date: 現在の日付 をセット
+    @report = Report.new(user_id: current_user.id, date: Time.current.strftime("%Y-%m-%d"))
   end
 
   # GET /reports/1/edit
   def edit
+    if @report.user_id != current_user.id
+      flash[:alert] = '他ユーザのreportは編集できません'
+      redirect_to root_url
+    end
   end
 
   # POST /reports

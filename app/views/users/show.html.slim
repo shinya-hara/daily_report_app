@@ -1,0 +1,23 @@
+.row
+  .col-md-3.col-sm-3.col-xs-12
+    = gravatar_for @user, size: 255
+
+    .
+      / 公開名が設定されている場合表示
+      h3.h4 = @user.username
+      / ユーザ名を表示（全員登録済みなはず ログインID）
+      h4.h6.text-muted @#{@user.username}
+
+    .
+      . 自己紹介 自己紹介 自己紹介 自己紹介 自己紹介 自己紹介 自己紹介
+      .
+        a href="#" HPなどへのリンク
+      . 所属
+  .col-md-9.col-sm-9.col-xs-12
+    h3 Reports
+    .
+      table.table
+        - @reports.each do |report|
+          tr
+            td
+              = link_to report.date, report_path(report)

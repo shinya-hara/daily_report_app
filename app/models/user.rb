@@ -17,6 +17,7 @@ class User < ApplicationRecord
   end
 
   validates :username,
-    uniqueness: { case_sensitive: :false },
-    length: { minimum: 4, maximum: 20 }
+    uniqueness: { case_sensitive: :true },
+    length: { minimum: 4, maximum: 20 },
+    format: { with: /\A[a-zA-Z0-9]+\z/ }  # 半角英数字
 end

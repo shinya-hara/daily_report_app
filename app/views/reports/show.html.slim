@@ -1,9 +1,12 @@
 p
   strong Date:
-  = @report.date
+  =< @report.date
 p
   strong Content:
-  = @report.content
+  =< @report.content
+p
+  strong Username:
+  =< User.find_by(id: @report.user_id).username
 
 / ログイン済み、かつ自分のreportの場合
 - if current_user && current_user.id == @report.user_id

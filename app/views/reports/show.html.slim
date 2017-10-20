@@ -1,16 +1,27 @@
-p
-  strong Date:
-  =< @report.date
-p
-  strong Content:
-  =< @report.content
-p
-  strong Username:
-  =< User.find_by(id: @report.user_id).username
+.row
+  / メインコンテンツ
+  .col-sm-9
+    h2 #{@report.date}の日報
 
-/ ログイン済み、かつ自分のreportの場合
-- if current_user && current_user.id == @report.user_id
-  => link_to 'Edit', edit_report_path(@report)
-  '|
+    .h4
+      span.text-muted.h6 witten by
+      =< link_to "#{@user.username}", "/users/info/#{@user.username}"
 
-=< link_to 'Back', reports_path
+    .border.border-left-0.border-right-0
+      = simple_format(h(@report.content))
+
+
+    / ログイン済み、かつ自分のreportの場合
+    - if current_user && current_user.id == @report.user_id
+      => link_to 'Edit', edit_report_path(@report)
+      '|
+
+    =< link_to 'Back', reports_path
+
+  / 右サイトバー
+  .col-sm-3
+    .
+      = link_to gravatar_for(@user, size: 80, fullwidth: false), "/users/info/#{@user.username}"
+      .
+        strong = link_to "#{@user.username}", "/users/info/#{@user.username}"
+        . Reports: 10

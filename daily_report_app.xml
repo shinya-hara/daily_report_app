@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- SQL XML created by WWW SQL Designer, https://github.com/ondras/wwwsqldesigner/ -->
+<!-- Active URL: http://ondras.zarovi.cz/sql/demo/ -->
+<sql>
+<datatypes db="postgresql">
+	<group color="rgb(238,238,170)" label="Numeric">
+		<type label="Integer" quote="" sql="INTEGER" length="0" re="INT"/>
+		<type label="Small Integer" quote="" sql="SMALLINT" length="0"/>
+		<type label="Big Integer" quote="" sql="BIGINT" length="0"/>
+		<type label="Decimal" quote="" sql="DECIMAL" length="1" re="numeric"/>
+		<type label="Serial" quote="" sql="SERIAL" length="0" re="SERIAL4" fk="Integer"/>
+		<type label="Big Serial" quote="" sql="BIGSERIAL" length="0" re="SERIAL8" fk="Big Integer"/>
+		<type label="Real" quote="" sql="BIGINT" length="0"/>
+		<type label="Single precision" quote="" sql="FLOAT" length="0"/>
+		<type label="Double precision" quote="" sql="DOUBLE" length="0" re="DOUBLE"/>
+	</group>
+
+	<group color="rgb(255,200,200)" label="Character">
+		<type label="Char" quote="'" sql="CHAR" length="1"/>
+		<type label="Varchar" quote="'" sql="VARCHAR" length="1" re="CHARACTER VARYING"/>
+		<type label="Text" quote="'" sql="TEXT" length="0"/>
+		<type label="Binary" quote="'" sql="BYTEA" length="1"/>
+		<type label="Boolean" quote="'" sql="BOOLEAN" length="0"/>
+	</group>
+
+	<group color="rgb(200,255,200)" label="Date &amp; Time">
+		<type label="Date" quote="'" sql="DATE" length="0"/>
+		<type label="Time" quote="'" sql="TIME" length="1"/>
+		<type label="Time w/ TZ" quote="'" sql="TIME WITH TIME ZONE" length="0"/>
+		<type label="Interval" quote="'" sql="INTERVAL" length="1"/>
+		<type label="Timestamp" quote="'" sql="TIMESTAMP" length="1"/>
+		<type label="Timestamp w/ TZ" quote="'" sql="TIMESTAMP WITH TIME ZONE" length="0"/>
+		<type label="Timestamp wo/ TZ" quote="'" sql="TIMESTAMP WITHOUT TIME ZONE" length="0"/>
+	</group>
+
+	<group color="rgb(200,200,255)" label="Miscellaneous">
+		<type label="XML" quote="'" sql="XML" length="1"/>
+		<type label="Bit" quote="'" sql="BIT" length="1"/>
+		<type label="Bit Varying" quote="'" sql="VARBIT" length="1" re="BIT VARYING"/>
+		<type label="Inet Host Addr" quote="'" sql="INET" length="0"/>
+		<type label="Inet CIDR Addr" quote="'" sql="CIDR" length="0"/>
+		<type label="Geometry" quote="'" sql="GEOMETRY" length="0"/>
+	</group>
+</datatypes><table x="145" y="57" name="users">
+<row name="id" null="0" autoincrement="1">
+<datatype>INTEGER</datatype>
+<default>NULL</default></row>
+<row name="email" null="0" autoincrement="0">
+<datatype>VARCHAR</datatype>
+</row>
+<row name="username" null="0" autoincrement="0">
+<datatype>VARCHAR</datatype>
+<default>'NULL'</default></row>
+<row name="admin" null="1" autoincrement="0">
+<datatype>BOOLEAN</datatype>
+<default>'false'</default></row>
+<row name="introduction" null="1" autoincrement="0">
+<datatype>TEXT(200)</datatype>
+<default>NULL</default></row>
+<row name="belong_to" null="1" autoincrement="0">
+<datatype>VARCHAR</datatype>
+<default>NULL</default></row>
+<row name="location" null="1" autoincrement="0">
+<datatype>VARCHAR</datatype>
+<default>NULL</default></row>
+<row name="site" null="1" autoincrement="0">
+<datatype>VARCHAR</datatype>
+<default>NULL</default></row>
+<row name="reports_count" null="1" autoincrement="0">
+<datatype>INTEGER</datatype>
+<default>NULL</default></row>
+<row name="encrypted_password" null="0" autoincrement="0">
+<datatype>VARCHAR</datatype>
+</row>
+<row name="reset_password_token" null="0" autoincrement="0">
+<datatype>VARCHAR</datatype>
+</row>
+<row name="reset_password_sent_at" null="1" autoincrement="0">
+<datatype>DATE</datatype>
+<default>NULL</default></row>
+<row name="remember_created_at" null="1" autoincrement="0">
+<datatype>DATE</datatype>
+<default>NULL</default></row>
+<row name="sign_in_count" null="0" autoincrement="0">
+<datatype>INTEGER</datatype>
+<default>0</default></row>
+<row name="current_sign_in_at" null="1" autoincrement="0">
+<datatype>DATE</datatype>
+<default>NULL</default></row>
+<row name="last_sign_in_at" null="1" autoincrement="0">
+<datatype>INTEGER</datatype>
+<default>NULL</default></row>
+<row name="current_sign_in_ip" null="1" autoincrement="0">
+<datatype>VARCHAR</datatype>
+<default>NULL</default></row>
+<row name="last_sign_in_ip" null="1" autoincrement="0">
+<datatype>VARCHAR</datatype>
+<default>NULL</default></row>
+<row name="created_at" null="0" autoincrement="0">
+<datatype>DATE</datatype>
+<default>'NULL'</default></row>
+<row name="updated_at" null="1" autoincrement="0">
+<datatype>DATE</datatype>
+<default>NULL</default></row>
+<key type="PRIMARY" name="">
+<part>id</part>
+</key>
+</table>
+<table x="412" y="68" name="reports">
+<row name="id" null="1" autoincrement="1">
+<datatype>INTEGER</datatype>
+<default>NULL</default></row>
+<row name="date" null="0" autoincrement="0">
+<datatype>DATE</datatype>
+<default>'NULL'</default></row>
+<row name="content" null="0" autoincrement="0">
+<datatype>TEXT</datatype>
+<default>'NULL'</default></row>
+<row name="user_id" null="1" autoincrement="0">
+<datatype>INTEGER</datatype>
+<default>NULL</default><relation table="users" row="id" />
+</row>
+<row name="created_at" null="1" autoincrement="0">
+<datatype>DATE</datatype>
+<default>NULL</default></row>
+<row name="updated_at" null="1" autoincrement="0">
+<datatype>DATE</datatype>
+<default>NULL</default></row>
+<key type="PRIMARY" name="">
+<part>id</part>
+</key>
+</table>
+<table x="401" y="275" name="comments">
+<row name="id" null="1" autoincrement="1">
+<datatype>INTEGER</datatype>
+<default>NULL</default></row>
+<row name="content" null="0" autoincrement="0">
+<datatype>TEXT</datatype>
+<default>'NULL'</default></row>
+<row name="user_id" null="1" autoincrement="0">
+<datatype>INTEGER</datatype>
+<default>NULL</default><relation table="users" row="id" />
+</row>
+<row name="report_id" null="1" autoincrement="0">
+<datatype>INTEGER</datatype>
+<default>NULL</default><relation table="reports" row="id" />
+</row>
+<row name="created_at" null="1" autoincrement="0">
+<datatype>DATE</datatype>
+<default>NULL</default></row>
+<row name="updated_at" null="1" autoincrement="0">
+<datatype>DATE</datatype>
+<default>NULL</default></row>
+<key type="PRIMARY" name="">
+<part>id</part>
+</key>
+</table>
+</sql>

@@ -4,25 +4,48 @@
     h2 #{@report.date}の日報
 
     .h4
-      span.text-muted.h6 written by
-      =< link_to "#{@user.username}", "/users/info/#{@user.username}"
-      = link_to gravatar_for(@user, size: 20, fullwidth: false), "/users/info/#{@user.username}"
+      = link_to gravatar_for(@report.user, size: 30, fullwidth: false), "/users/info/#{@report.user.username}"
+      = link_to "#{@report.user.username}", "/users/info/#{@report.user.username}"
 
     .border.border-left-0.border-right-0
       = simple_format(h(@report.content))
 
-
     / ログイン済み、かつ自分のreportの場合
-    - if user_signed_in? && current_user.id == @report.user_id
-      => link_to 'Edit', edit_report_path(@report)
-      '|
+    - if user_signed_in? && current_user == @report.user
+      = link_to 'Edit', edit_report_path(@report)
 
-    =< link_to 'Back', reports_path
+    h3 コメント
+    - if @report.comments.any?
+      - @report.comments.order(:created_at).each do |comment|
+        .card
+          .card-header
+            .float-left = link_to gravatar_for(comment.user, size: 25, fullwidth: false), "/users/info/#{comment.user.username}"
+            .float-left = link_to "#{comment.user.username}", "/users/info/#{comment.user.username}"
+            .float-right = comment.created_at.strftime('%Y-%m-%d %H:%M')
+
+          .card-body
+            = simple_format(h(comment.content))
+            - if user_signed_in? && current_user == comment.user
+              .text-right
+                = link_to 'Delete', report_comment_path(@report, comment), method: :delete, data: { confirm: 'Are you sure?' }
+
+    - if user_signed_in?
+      = form_for([@report, @report.comments.build(user_id: current_user.id)]) do |f|
+        .form-group
+          = f.text_area :content, rows: 5, spellcheck: false, class: "form-control"
+
+        = f.hidden_field :user_id
+        = f.hidden_field :report_id
+
+        = f.submit class: "btn btn-primary"
+
+    = link_to 'Back', reports_path
+
 
   / 右サイドバー
   .col-sm-3
     .
-      = link_to gravatar_for(@user, size: 80, fullwidth: false), "/users/info/#{@user.username}"
+      = link_to gravatar_for(@report.user, size: 80, fullwidth: false), "/users/info/#{@report.user.username}"
       .
-        strong = link_to "#{@user.username}", "/users/info/#{@user.username}"
-        . Reports: #{@user.reports.size}
+        strong = link_to "#{@report.user.username}", "/users/info/#{@report.user.username}"
+        . Reports: #{@report.user.reports.size}

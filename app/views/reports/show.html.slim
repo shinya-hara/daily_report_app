@@ -4,7 +4,7 @@
     h2 #{@report.date}の日報
 
     .h4
-      span.text-muted.h6 witten by
+      span.text-muted.h6 written by
       =< link_to "#{@user.username}", "/users/info/#{@user.username}"
       = link_to gravatar_for(@user, size: 20, fullwidth: false), "/users/info/#{@user.username}"
 
@@ -13,13 +13,13 @@
 
 
     / ログイン済み、かつ自分のreportの場合
-    - if current_user && current_user.id == @report.user_id
+    - if user_signed_in? && current_user.id == @report.user_id
       => link_to 'Edit', edit_report_path(@report)
       '|
 
     =< link_to 'Back', reports_path
 
-  / 右サイトバー
+  / 右サイドバー
   .col-sm-3
     .
       = link_to gravatar_for(@user, size: 80, fullwidth: false), "/users/info/#{@user.username}"

@@ -13,8 +13,8 @@
 
   .form-group
     = f.label :content
-    = f.text_area :content, class: "form-control"
+    = f.text_area :content, rows: 25, spellcheck: false, class: "form-control"
 
   = f.hidden_field :user_id
-
+  
   = f.submit class: "btn btn-primary"

@@ -3,16 +3,31 @@
     = gravatar_for @user, size: 255, fullwidth: true
 
     .
-      / 公開名が設定されている場合表示
-      h3.h4 = @user.username
-      / ユーザ名を表示（全員登録済みなはず ログインID）
-      h4.h6.text-muted @#{@user.username}
+      / 名前が設定されている場合表示
+      h4
+        - if @user.last_name.present?
+          = @user.last_name
+        - if @user.first_name.present?
+          =< @user.first_name
 
+      / ユーザ名を表示（全員登録済みなはず ログインID）
+      - if @user.last_name.present? || @user.first_name.present?
+        h6.text-muted = "@#{@user.username}"
+      - else
+        h4.text-muted = "@#{@user.username}"
     .
-      . 自己紹介 自己紹介 自己紹介 自己紹介 自己紹介 自己紹介 自己紹介
-      .
-        a href="#" HPなどへのリンク
-      . 所属
+      - if @user.introduction.present?
+        . = @user.introduction
+
+      - if @user.site.present?
+        = link_to @user.site, @user.site
+
+      - if @user.belong_to.present?
+        . = @user.belong_to
+
+      - if @user.location.present?
+        . = @user.location
+
   .col-md-9.col-sm-9.col-xs-12
     h3#aaa Reports: #{@user.reports.size}
     .

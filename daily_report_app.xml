@@ -54,6 +54,12 @@
 <row name="admin" null="1" autoincrement="0">
 <datatype>BOOLEAN</datatype>
 <default>'false'</default></row>
+<row name="first_name" null="1" autoincrement="0">
+<datatype>VARCHAR</datatype>
+<default>NULL</default></row>
+<row name="last_name" null="1" autoincrement="0">
+<datatype>VARCHAR</datatype>
+<default>NULL</default></row>
 <row name="introduction" null="1" autoincrement="0">
 <datatype>TEXT(200)</datatype>
 <default>NULL</default></row>

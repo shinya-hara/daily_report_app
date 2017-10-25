@@ -32,29 +32,29 @@ h2 Edit = resource_name.to_s.humanize
       | (we need your current password to confirm your changes)
     = f.password_field :current_password, autocomplete: "off", class: "form-control"
 
-    .form-group
-      = f.label '名前'
-      .row
-        .col
-          = f.text_field :first_name, placeholder: '名', class: "form-control"
-        .col
-          = f.text_field :last_name, placeholder: '姓', class: "form-control"
+  .form-group
+    = f.label '名前'
+    .row
+      .col
+        = f.text_field :last_name, placeholder: '姓', class: "form-control"
+      .col
+        = f.text_field :first_name, placeholder: '名', class: "form-control"
+        
+  .form-group
+    = f.label :introduction, '自己紹介'
+    = f.text_area :introduction, rows: 7, class: "form-control"
 
-    .form-group
-      = f.label :introduction, '自己紹介'
-      = f.text_area :introduction, class: "form-control"
+  .form-group
+    = f.label :belong_to, '所属'
+    = f.text_field :belong_to, class: "form-control"
 
-    .form-group
-      = f.label :belong_to, '所属'
-      = f.text_field :belong_to, class: "form-control"
+  .form-group
+    = f.label :location, '居住地'
+    = f.text_field :location, placeholder: 'Tokyo, Japan', class: "form-control"
 
-    .form-group
-      = f.label :location, '居住地'
-      = f.text_field :location, class: "form-control"
-
-    .form-group
-      = f.label :site, 'サイト/ブログ'
-      = f.text_field :site, placeholder: 'URL', class: "form-control"
+  .form-group
+    = f.label :site, 'サイト/ブログ'
+    = f.text_field :site, placeholder: 'URL', class: "form-control"
 
   = f.submit "Update", class: "btn btn-primary"
 

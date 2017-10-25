@@ -26,11 +26,12 @@ h2 Edit = resource_name.to_s.humanize
     = f.label :password_confirmation
     = f.password_field :password_confirmation, autocomplete: "off", class: "form-control"
 
-  .form-group
-    => f.label :current_password
-    i
-      | (we need your current password to confirm your changes)
-    = f.password_field :current_password, autocomplete: "off", class: "form-control"
+  - if false
+    .form-group
+      => f.label :current_password
+      i
+        | (we need your current password to confirm your changes)
+      = f.password_field :current_password, autocomplete: "off", class: "form-control"
 
   .form-group
     = f.label '名前'
@@ -39,7 +40,7 @@ h2 Edit = resource_name.to_s.humanize
         = f.text_field :last_name, placeholder: '姓', class: "form-control"
       .col
         = f.text_field :first_name, placeholder: '名', class: "form-control"
-        
+
   .form-group
     = f.label :introduction, '自己紹介'
     = f.text_area :introduction, rows: 7, class: "form-control"

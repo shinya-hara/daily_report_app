@@ -2,39 +2,7 @@
   .col-md-3.col-sm-3.col-xs-12
     = gravatar_for @user, size: 255, fullwidth: true
 
-    .
-      / 名前が設定されている場合表示
-      h4
-        - if @user.last_name.present?
-          = @user.last_name
-        - if @user.first_name.present?
-          =< @user.first_name
-
-      / ユーザ名を表示（全員登録済みなはず ログインID）
-      - if @user.last_name.present? || @user.first_name.present?
-        h6.text-muted @#{@user.username}
-      - else
-        h4.text-muted @#{@user.username}
-
-      hr
-    .
-      - if @user.introduction.present?
-        . = @user.introduction
-        hr
-
-      - if @user.site.present?
-        => fa_icon('link')
-        = link_to @user.site, @user.site, target: '_blank', style: 'word-break: break-all'
-
-      - if @user.belong_to.present?
-        .
-          => fa_icon('building-o')
-          = @user.belong_to
-
-      - if @user.location.present?
-        .
-          => fa_icon('map-marker')
-          = @user.location
+    == render 'profile'
 
   .col-md-9.col-sm-9.col-xs-12
     h3#aaa Reports: #{@user.reports.size}

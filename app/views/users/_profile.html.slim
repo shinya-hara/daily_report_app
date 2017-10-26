@@ -1,0 +1,33 @@
+.
+  / 名前が設定されている場合表示
+  h4
+    - if @user.last_name.present?
+      = @user.last_name
+    - if @user.first_name.present?
+      =< @user.first_name
+
+  / ユーザ名を表示（全員登録済みなはず ログインID）
+  - if @user.last_name.present? || @user.first_name.present?
+    h6.text-muted @#{@user.username}
+  - else
+    h4.text-muted @#{@user.username}
+
+  hr
+.
+  - if @user.introduction.present?
+    . = simple_format(h(@user.introduction))
+    hr
+
+  - if @user.site.present?
+    => fa_icon('link')
+    = link_to @user.site, @user.site, target: '_blank', style: 'word-break: break-all'
+
+  - if @user.belong_to.present?
+    .
+      => fa_icon('building-o')
+      = @user.belong_to
+
+  - if @user.location.present?
+    .
+      => fa_icon('map-marker')
+      = @user.location

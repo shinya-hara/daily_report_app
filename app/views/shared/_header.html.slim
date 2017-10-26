@@ -1,4 +1,4 @@
-nav.navbar.navbar-expand-lg.navbar-dark.bg-dark
+nav.navbar.navbar-expand-lg.navbar-dark.bg-dark.mb-3
   .container
     = link_to 'Daily Report App', root_path, class: 'navbar-brand'
     button.navbar-toggler type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"
@@ -15,8 +15,11 @@ nav.navbar.navbar-expand-lg.navbar-dark.bg-dark
           - if current_user.admin?
             li.nav-item
               = link_to 'Management', rails_admin_path, class: 'nav-link'
+
           li.nav-item.dropdown
-            a.nav-link.dropdown-toggle#navbarDropdown href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" #{current_user.username}
+            a.nav-link.dropdown-toggle#navbarDropdown href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+              = current_user.username
+              = gravatar_for(current_user, size: 30, fullwidth: false)
             .dropdown-menu aria-labelledby="navbarDropdown"
               = link_to 'My page', "/users/info/#{current_user.username}", class: 'dropdown-item'
               = link_to 'Settings', edit_user_registration_path, class: 'dropdown-item'

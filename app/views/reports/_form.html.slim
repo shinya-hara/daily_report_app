@@ -1,10 +1,12 @@
 = form_for @report do |f|
   - if @report.errors.any?
     #error_explanation.alert.alert-danger
-      h2 = "#{pluralize(@report.errors.count, "error")} prohibited this report from being saved:"
-      ul
-        - @report.errors.full_messages.each do |message|
-          li = message
+      / h2 = "#{pluralize(@report.errors.count, "error")} prohibited this report from being saved:"
+      / ul
+      /   - @report.errors.full_messages.each do |message|
+      /     li = message
+      - @report.errors.full_messages.each do |message|
+        . = message
 
   .form-group
     = f.label :date
@@ -16,5 +18,5 @@
     = f.text_area :content, rows: 25, spellcheck: false, class: "form-control"
 
   = f.hidden_field :user_id
-  
+
   = f.submit class: "btn btn-primary"

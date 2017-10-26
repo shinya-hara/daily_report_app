@@ -3,7 +3,7 @@
   .col-sm-9
     h2 #{@report.date}の日報
 
-    .h4
+    h4
       = link_to gravatar_for(@report.user, size: 30, fullwidth: false), "/users/info/#{@report.user.username}"
       = link_to "#{@report.user.username}", "/users/info/#{@report.user.username}"
 
@@ -14,10 +14,9 @@
     - if user_signed_in? && current_user == @report.user
       = link_to 'Edit', edit_report_path(@report)
 
-    h3 コメント
     - if @report.comments.any?
       - @report.comments.order(:created_at).each do |comment|
-        .card
+        .card.mb-3
           .card-header
             .float-left = link_to gravatar_for(comment.user, size: 25, fullwidth: false), "/users/info/#{comment.user.username}"
             .float-left = link_to "#{comment.user.username}", "/users/info/#{comment.user.username}"
@@ -30,6 +29,10 @@
                 = link_to 'Delete', report_comment_path(@report, comment), method: :delete, data: { confirm: 'Are you sure?' }
 
     - if user_signed_in?
+      .
+        = link_to gravatar_for(current_user, size: 25, fullwidth: false), "/users/info/#{current_user.username}"
+        | コメントを投稿する
+
       = form_for([@report, @report.comments.build(user_id: current_user.id)]) do |f|
         .form-group
           = f.text_area :content, rows: 5, spellcheck: false, class: "form-control"

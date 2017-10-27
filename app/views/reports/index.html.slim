@@ -1,10 +1,10 @@
-h1 Reports
+h1 日報一覧
 
 table.table
   thead
     tr
-      th Date
-      th User
+      th 日付
+      th ユーザ名
       th
       th
       th
@@ -13,16 +13,16 @@ table.table
     - @reports.each do |report|
       tr
         td = report.date
-        td = User.find_by(id: report.user_id).username
-        td = link_to 'Show', report
+        td = report.user.username
+        td = link_to '詳細', report
         td
           - if @user.id == report.user_id
-            = link_to 'Edit', edit_report_path(report)
+            = link_to '編集', edit_report_path(report)
         td
           - if @user.id == report.user_id
-            = link_to 'Destroy', report, data: { confirm: 'Are you sure?' }, method: :delete
+            = link_to '削除', report, data: { confirm: 'Are you sure?' }, method: :delete
 
 br
 
 - if can? :create, Report
-  = link_to 'New Report', new_report_path
+  = link_to '日報を作成する', new_report_path, class: 'btn btn-primary'

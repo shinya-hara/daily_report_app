@@ -1,25 +1,28 @@
+h2 #{@report.date}の日報
 .row
   / メインコンテンツ
   .col-sm-9
-    h2 #{@report.date}の日報
-
-    h4
-      = link_to gravatar_for(@report.user, size: 30, fullwidth: false), "/users/info/#{@report.user.username}"
-      = link_to "#{@report.user.username}", "/users/info/#{@report.user.username}"
-
-    .border.border-left-0.border-right-0
-      = simple_format(h(@report.content))
-
+    .clearfix
+      .float-left
+        = link_to gravatar_for(@report.user, size: 30, fullwidth: false), "/users/info/#{@report.user.username}"
+        = link_to @report.user.username, "/users/info/#{@report.user.username}"
+      .float-right = @report.created_at.strftime('%Y-%m-%d %H:%M')
     / ログイン済み、かつ自分のreportの場合
     - if user_signed_in? && current_user == @report.user
-      = link_to 'Edit', edit_report_path(@report)
+      .clearfix
+        .float-right
+          => link_to '編集', edit_report_path(@report)
+          = link_to '削除', @report, data: { confirm: 'Are you sure?' }, method: :delete
+
+    .border.border-left-0.border-right-0.mb-3
+      = simple_format(h(@report.content))
 
     - if @report.comments.any?
       - @report.comments.order(:created_at).each do |comment|
         .card.mb-3
           .card-header
             .float-left = link_to gravatar_for(comment.user, size: 25, fullwidth: false), "/users/info/#{comment.user.username}"
-            .float-left = link_to "#{comment.user.username}", "/users/info/#{comment.user.username}"
+            .float-left = link_to comment.user.username, "/users/info/#{comment.user.username}"
             .float-right = comment.created_at.strftime('%Y-%m-%d %H:%M')
 
           .card-body
@@ -30,7 +33,7 @@
 
     - if user_signed_in?
       .
-        = link_to gravatar_for(current_user, size: 25, fullwidth: false), "/users/info/#{current_user.username}"
+        => link_to gravatar_for(current_user, size: 25, fullwidth: false), "/users/info/#{current_user.username}"
         | コメントを投稿する
 
       = form_for([@report, @report.comments.build(user_id: current_user.id)]) do |f|
@@ -40,15 +43,17 @@
         = f.hidden_field :user_id
         = f.hidden_field :report_id
 
-        = f.submit class: "btn btn-primary"
-
-    = link_to 'Back', reports_path
-
+        = f.submit '投稿', class: "btn btn-primary"
 
   / 右サイドバー
   .col-sm-3
     .
       = link_to gravatar_for(@report.user, size: 80, fullwidth: false), "/users/info/#{@report.user.username}"
       .
-        strong = link_to "#{@report.user.username}", "/users/info/#{@report.user.username}"
-        . Reports: #{@report.user.reports.size}
+        strong = link_to @report.user.username, "/users/info/#{@report.user.username}"
+        . 日報: #{@report.user.reports.size}
+      .
+        h5 最近の日報
+        ul
+          - @report.user.reports.each do |report|
+            li = link_to report.date, report_path(report)

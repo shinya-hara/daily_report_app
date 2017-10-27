@@ -4,9 +4,9 @@ module ApplicationHelper
     gravatar_id = Digest::MD5::hexdigest(user.email.downcase)
     gravatar_url = "http://secure.gravatar.com/avatar/#{gravatar_id}?s=#{size}"
     if fullwidth
-      image_tag(gravatar_url, alt: user.username, class: 'gravatar', width: '100%')
+      image_tag(gravatar_url, alt: user.username, class: 'gravatar rounded', width: '100%')
     else
-      image_tag(gravatar_url, alt: user.username, class: 'gravatar')
+      image_tag(gravatar_url, alt: user.username, class: 'gravatar rounded')
     end
   end
 end

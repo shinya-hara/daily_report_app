@@ -7,18 +7,18 @@ h2 Edit = resource_name.to_s.humanize
       = devise_error_messages!
 
       .form-group
-        = f.label :email, 'メールアドレス'
+        = f.label :email
         = f.email_field :email, autofocus: true, class: "form-control"
 
       - if devise_mapping.confirmable? && resource.pending_reconfirmation?
         .alert.alert-warning Currently waiting confirmation for: = resource.unconfirmed_email
 
       .form-group
-        = f.label :username, 'ユーザ名'
+        = f.label :username
         = f.text_field :username, class: "form-control"
 
       .form-group
-        => f.label :password, 'パスワード'
+        => f.label :password
         i
           | (leave blank if you don't want to change it)
         = f.password_field :password, autocomplete: "off", class: "form-control"
@@ -26,7 +26,7 @@ h2 Edit = resource_name.to_s.humanize
           small.form-text.text-muted #{@minimum_password_length} 文字以上
 
       .form-group
-        = f.label :password_confirmation, '確認用パスワード'
+        = f.label :password_confirmation
         = f.password_field :password_confirmation, autocomplete: "off", class: "form-control"
 
       - if false
@@ -45,22 +45,22 @@ h2 Edit = resource_name.to_s.humanize
             = f.text_field :first_name, placeholder: '名', class: "form-control"
 
       .form-group
-        = f.label :introduction, '自己紹介'
+        = f.label :introduction
         = f.text_area :introduction, rows: 7, class: "form-control"
 
       .form-group
-        = f.label :belong_to, '所属'
+        = f.label :belong_to
         = f.text_field :belong_to, class: "form-control"
 
       .form-group
-        = f.label :location, '居住地'
+        = f.label :location
         = f.text_field :location, placeholder: 'Tokyo, Japan', class: "form-control"
 
       .form-group
-        = f.label :site, 'サイト/ブログ'
+        = f.label :site
         = f.text_field :site, placeholder: 'URL', class: "form-control"
 
-      = f.submit "更新", class: "btn btn-primary"
+      = f.submit class: "btn btn-primary"
 
 .card.mt-4
   .card-header.bg-danger.text-light アカウント削除

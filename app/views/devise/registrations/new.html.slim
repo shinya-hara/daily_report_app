@@ -15,12 +15,12 @@ h2 Sign up
     = f.label :password
     = f.password_field :password, autocomplete: "off", class: "form-control"
     - if @minimum_password_length
-      small.form-text.text-muted #{@minimum_password_length} characters minimum
+      small.form-text.text-muted #{@minimum_password_length}文字以上
 
   .form-group
     = f.label :password_confirmation
     = f.password_field :password_confirmation, autocomplete: "off", class: "form-control"
 
-  = f.submit "Sign up", class: "btn btn-primary"
+  = f.submit "ユーザ登録", class: "btn btn-primary"
 
 == render "devise/shared/links"

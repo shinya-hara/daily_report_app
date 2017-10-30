@@ -12,6 +12,8 @@ class ReportsController < ApplicationController
   # GET /reports/1
   # GET /reports/1.json
   def show
+    @user = @report.user
+    @reports = @user.reports.order(date: :desc).limit(5)
   end
 
   # GET /reports/new

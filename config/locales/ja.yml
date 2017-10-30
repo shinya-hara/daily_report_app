@@ -211,7 +211,32 @@ ja:
       update: 更新
   activerecord:
     models:
+      report: 日報
+      user: ユーザ
+      comment: コメント
     attributes:
       report:
         date: 日付
         content: 内容
+        createed_at: 作成日時
+        updated_at: 更新日時
+      user:
+        login: ユーザ名 または パスワード
+        email: メールアドレス
+        password: パスワード
+        password_confirmation: 確認用パスワード
+        username: ユーザ名
+        remember_me: ログイン情報を保存
+        reports_count: 日報数
+        introduction: 自己紹介
+        belong_to: 所属
+        location: 居住地
+        site: サイト/ブログ
+        first_name: 名
+        last_name: 姓
+        createed_at: 作成日時
+        updated_at: 更新日時
+      comment:
+        content: コメント
+        createed_at: 作成日時
+        updated_at: 更新日時

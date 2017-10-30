@@ -1,25 +1,28 @@
-h2 #{@report.date}の日報
+- content_for :report_title
+  .jumbotron.jumbotron-fluid
+    .container
+      h2 #{@report.date}の日報
+      .clearfix
+        .float-left
+          = link_to gravatar_for(@user, size: 30, fullwidth: false), "/users/info/#{@user.username}"
+          = link_to @user.username, "/users/info/#{@user.username}"
+        .float-right = @report.created_at.strftime('%Y-%m-%d %H:%M')
+      - if user_signed_in? && current_user == @user
+        .clearfix
+          .float-right
+            => link_to '編集', edit_report_path(@report)
+            = link_to '削除', @report, data: { confirm: 'Are you sure?' }, method: :delete
+
 .row
   / メインコンテンツ
   .col-sm-9
-    .clearfix
-      .float-left
-        = link_to gravatar_for(@report.user, size: 30, fullwidth: false), "/users/info/#{@report.user.username}"
-        = link_to @report.user.username, "/users/info/#{@report.user.username}"
-      .float-right = @report.created_at.strftime('%Y-%m-%d %H:%M')
-    / ログイン済み、かつ自分のreportの場合
-    - if user_signed_in? && current_user == @report.user
-      .clearfix
-        .float-right
-          => link_to '編集', edit_report_path(@report)
-          = link_to '削除', @report, data: { confirm: 'Are you sure?' }, method: :delete
-
-    .border.border-left-0.border-right-0.mb-3
+    .
       = simple_format(h(@report.content))
+      hr
 
     - if @report.comments.any?
       - @report.comments.order(:created_at).each do |comment|
-        .card.mb-3
+        .card.mt-3
           .card-header
             .float-left = link_to gravatar_for(comment.user, size: 25, fullwidth: false), "/users/info/#{comment.user.username}"
             .float-left = link_to comment.user.username, "/users/info/#{comment.user.username}"
@@ -29,11 +32,11 @@ h2 #{@report.date}の日報
             = simple_format(h(comment.content))
             - if user_signed_in? && current_user == comment.user
               .text-right
-                = link_to 'Delete', report_comment_path(@report, comment), method: :delete, data: { confirm: 'Are you sure?' }
+                = link_to '削除', report_comment_path(@report, comment), method: :delete, data: { confirm: 'Are you sure?' }
 
     - if user_signed_in?
-      .
-        => link_to gravatar_for(current_user, size: 25, fullwidth: false), "/users/info/#{current_user.username}"
+      .mt-3
+        => gravatar_for(current_user, size: 25, fullwidth: false)
         | コメントを投稿する
 
       = form_for([@report, @report.comments.build(user_id: current_user.id)]) do |f|
@@ -48,12 +51,13 @@ h2 #{@report.date}の日報
   / 右サイドバー
   .col-sm-3
     .
-      = link_to gravatar_for(@report.user, size: 80, fullwidth: false), "/users/info/#{@report.user.username}"
+      = link_to gravatar_for(@user, size: 80, fullwidth: false), "/users/info/#{@user.username}"
       .
-        strong = link_to @report.user.username, "/users/info/#{@report.user.username}"
-        . 日報: #{@report.user.reports.size}
+        strong = link_to @user.username, "/users/info/#{@user.username}"
+        . 日報数：#{@user.reports.size}
+        hr
       .
         h5 最近の日報
         ul
-          - @report.user.reports.each do |report|
+          - @reports.each do |report|
             li = link_to report.date, report_path(report)

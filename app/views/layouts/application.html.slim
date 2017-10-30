@@ -9,12 +9,13 @@ html
 
   body
     == render 'shared/header'
-    .container
+    == yield :report_title
+    .container.my-3
       - if notice
         .alert.alert-info = notice
       - if alert
         .alert.alert-danger = alert
       == yield
-    footer.container.my-4
+    footer.container
       hr
       .text-muted Copyright © 2017 #{link_to 'Daily Report App', root_path} All Rights Reserved.

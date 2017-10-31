@@ -25,6 +25,7 @@ ActiveRecord::Schema.define(version: 20171024081602) do
   create_table "reports", force: :cascade do |t|
     t.date "date", null: false
     t.text "content", null: false
+    t.integer "comments_count", default: 0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "user_id"
@@ -46,7 +47,7 @@ ActiveRecord::Schema.define(version: 20171024081602) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "username"
-    t.integer "reports_count"
+    t.integer "reports_count", default: 0
     t.text "introduction", limit: 200
     t.string "belong_to"
     t.string "location"

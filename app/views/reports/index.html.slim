@@ -24,6 +24,9 @@ table.table
         /   - if @user.id == report.user_id
         /     = link_to '削除', report, data: { confirm: 'Are you sure?' }, method: :delete
 
+.d-flex.justify-content-center
+  = paginate @reports
+
 br
 
 - if can? :create, Report

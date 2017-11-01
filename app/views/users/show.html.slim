@@ -6,9 +6,12 @@
 
   .col-md-9.col-sm-9.col-xs-12
     h3 日報数：#{@user.reports.size}
-    .
-      table.table
+    table.table
+        th 日付
+        th コメント
         - @reports.each do |report|
           tr
-            td
-              = link_to report.date, report_path(report)
+            td = link_to report.date, report_path(report)
+            td = report.comments.size
+    .d-flex.justify-content-center
+      = paginate @reports

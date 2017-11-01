@@ -5,8 +5,10 @@ class ReportsController < ApplicationController
   # GET /reports
   # GET /reports.json
   def index
-    @reports = Report.all.order(date: :desc)
+    # @reports = Report.all.order(date: :desc)
+    @reports = Report.page(params[:page]).per(10).order(date: :desc)
     @user = current_user || User.new
+
   end
 
   # GET /reports/1
@@ -25,7 +27,7 @@ class ReportsController < ApplicationController
   # GET /reports/1/edit
   def edit
     if @report.user_id != current_user.id
-      flash[:alert] = '他ユーザのreportは編集できません'
+      flash[:alert] = '他ユーザの日報は編集できません'
       redirect_to root_url
     end
   end
@@ -51,7 +53,7 @@ class ReportsController < ApplicationController
   def update
     respond_to do |format|
       if @report.update(report_params)
-        format.html { redirect_to @report, notice: 'Report was successfully updated.' }
+        format.html { redirect_to @report, notice: '日報を作成しました' }
         format.json { render :show, status: :ok, location: @report }
       else
         format.html { render :edit }
@@ -65,7 +67,7 @@ class ReportsController < ApplicationController
   def destroy
     @report.destroy
     respond_to do |format|
-      format.html { redirect_to reports_url, notice: 'Report was successfully destroyed.' }
+      format.html { redirect_to reports_url, notice: '日報を削除しました' }
       format.json { head :no_content }
     end
   end

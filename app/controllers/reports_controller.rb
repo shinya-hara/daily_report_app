@@ -7,6 +7,10 @@ class ReportsController < ApplicationController
   def index
     # @reports = Report.all.order(date: :desc)
     @reports = Report.page(params[:page]).per(10).order(date: :desc)
+    respond_to do |format|
+      format.html
+      format.js
+    end
     @user = current_user || User.new
 
   end

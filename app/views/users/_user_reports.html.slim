@@ -1,0 +1,15 @@
+table.table
+  thead
+    tr
+      th 日付
+      th コメント
+
+  tbody
+    - @reports.each do |report|
+      tr
+        td = link_to report.date, report_path(report)
+        td = report.comments.size
+
+/ Kaminari paginator
+.d-flex.justify-content-center
+  = paginate @reports, remote: true

@@ -1,11 +1,13 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
-  user_id: 1
-  report_id: 1
-  content: MyText
-
-two:
-  user_id: 1
-  report_id: 1
-  content: MyText
+# # カウンターキャッシュが動作しないため、コメントの表示ができない
+# <% (10..11).each do |month| %>
+#   <% (1..30).each do |day| %>
+#     <% rand(5).times do |n| %>
+#     comment<%= month %>-<%= day %>-<%= n %>:
+#       content: comment from text/fixtures/comment.yml
+#       report: report<%= rand(2)+10 %>-<%= rand(30)+1 %>
+#       user: user<%= rand(10)+1 %>
+#     <% end %>
+#   <% end %>
+# <% end %>

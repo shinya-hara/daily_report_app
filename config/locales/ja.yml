@@ -221,7 +221,7 @@ ja:
         createed_at: 作成日時
         updated_at: 更新日時
       user:
-        login: ユーザ名 または パスワード
+        login: ユーザ名 または メールアドレス
         email: メールアドレス
         password: パスワード
         password_confirmation: 確認用パスワード

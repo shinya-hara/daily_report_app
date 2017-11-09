@@ -7,47 +7,49 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 # 管理者ユーザ
-user = User.new
-user.email = "admin@example.com"
-user.username = "admin"
-user.password = "password"
-user.password_confirmation = "password"
-user.admin = true
-user.save!
+# user = User.new
+# user.email = "admin@example.com"
+# user.username = "admin"
+# user.password = "password"
+# user.password_confirmation = "password"
+# user.admin = true
+# user.save!
+User.create(
+  email: "admin@example.com",
+  username: "admin",
+  password: "password",
+  password_confirmation: "password",
+  admin: true
+)
 
 # 一般ユーザ
-10.times do |num|
-  user = User.new
-  user.email = "example#{num}@example.com"
-  user.username = "user#{num}"
-  user.password = "password"
-  user.password_confirmation = "password"
-  user.save!
+(1..10).each do |n|
+  User.create(
+    email: "example#{n}@example.com",
+    username: "user#{n}",
+    password: "password",
+    password_confirmation: "password",
+  )
 end
 
 # 日報
-1.upto(30) do |day|
-  report = Report.new
-  report.date = "2017-10-#{day}"
-  report.content = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
-  report.user_id = rand(11)+1
-  report.save!
-end
-1.upto(30) do |day|
-  report = Report.new
-  report.date = "2017-9-#{day}"
-  report.content = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
-  report.user_id = rand(11)+1
-  report.save!
+(10..11).each do |month|
+  (1..30).each do |day|
+    Report.create(
+      date: "2017-#{month}-#{day}",
+      content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+      user: User.order("RANDOM()").first,
+    )
+  end
 end
 
 # コメント
 Report.all.each do |report|
   rand(5).times do
-    comment = Comment.new
-    comment.content = "hello from seed"
-    comment.report_id = report.id
-    comment.user_id = User.order("RANDOM()").first.id
-    comment.save!
+    Comment.create(
+      content: "hello from seed",
+      report: report,
+      user: User.order("RANDOM()").first,
+    )
   end
 end

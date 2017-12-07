@@ -1,0 +1,21 @@
+h1 = @group.name
+
+p = @group.description
+
+p
+  | Owner:
+  =< @group.user.username
+
+= form_for(@group, url: groups_set_path, method: :post) do |f|
+  .form-group
+    = f.label :password
+    = f.password_field :password, class: "form-control"
+
+  = f.hidden_field :group_id, value: @group.id
+
+  = f.submit 'このグループに参加', class: "btn btn-primary"
+
+
+=> link_to 'Edit', edit_group_path(@group)
+'|
+=< link_to 'Back', groups_path

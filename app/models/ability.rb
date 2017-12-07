@@ -32,8 +32,8 @@ class Ability
     user ||= User.new
 
     # default permission
-    cannot [:create, :update, :delete], Report
-    can :read, Report
+    cannot [:create, :update, :delete], [Report, Group]
+    can :read, [Report, Group]
 
     if user.admin?
       can :access, :rails_admin
@@ -42,7 +42,8 @@ class Ability
 
     # ログインしている場合
     if user.id?
-      can [:create, :update, :delete], Report
+      can [:create, :update, :delete], [Report, Group]
+      can :set, Group
     end
   end
 end

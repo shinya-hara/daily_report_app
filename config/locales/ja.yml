@@ -206,7 +206,7 @@ ja:
   # 独自設定（設定の上書き）
   helpers:
     submit:
-      create: 日報を作成
+      create: 作成
       submit: 保存する
       update: 更新
   activerecord:
@@ -243,3 +243,10 @@ ja:
   views:
     pagination:
       truncate: ...
+  unauthorized:
+    # manage:
+    #   all: "Not authorized to %{action} %{subject}."
+    #   user: "Not allowed to manage other user accounts."
+    create:
+      report: 続けるには、ログインまたは登録（サインアップ）が必要です。
+      group: 続けるには、ログインまたは登録（サインアップ）が必要です。

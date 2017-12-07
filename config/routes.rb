@@ -4,6 +4,8 @@ Rails.application.routes.draw do
   resources :reports do
     resources :comments, only: [:create, :destroy]
   end
+  post 'groups/set'
+  resources :groups
   get 'users/info/:username' => 'users#show'
   root to: 'reports#index'
 end

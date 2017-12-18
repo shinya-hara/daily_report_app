@@ -20,7 +20,7 @@ h2 Edit = resource_name.to_s.humanize
       .form-group
         => f.label :password
         i
-          | (leave blank if you don't want to change it)
+          | （パスワードを変更しない場合は空欄で構いません）
         = f.password_field :password, autocomplete: "off", class: "form-control"
         - if @minimum_password_length
           small.form-text.text-muted #{@minimum_password_length} 文字以上
@@ -63,7 +63,13 @@ h2 Edit = resource_name.to_s.humanize
       = f.submit class: "btn btn-primary"
 
 .card.mt-4
+  .card-header 所属グループ管理
+  .card-body
+    p グループへの参加や退出などの管理を行います．
+    = link_to "グループ管理", groups_path, class: "btn btn-success"
+
+.card.mt-4
   .card-header.bg-danger.text-light アカウント削除
   .card-body
-    | アカウントを削除すると二度と元に戻せません．
+    p アカウントを削除すると二度と元に戻せません．
     = button_to "アカウントを削除する", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete, class: "btn btn-outline-danger"

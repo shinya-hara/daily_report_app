@@ -7,10 +7,12 @@
           = link_to gravatar_for(@user, size: 30, fullwidth: false), "/users/info/#{@user.username}"
           = link_to @user.username, "/users/info/#{@user.username}"
         .float-right = @report.created_at.strftime('%Y-%m-%d %H:%M')
-      - if user_signed_in? && current_user == @user
-        .clearfix
-          .float-right
+      / - if user_signed_in? && current_user == @user
+      .clearfix
+        .float-right
+          - if can? :update, @report
             => link_to '編集', edit_report_path(@report)
+          - if can? :destroy, @report
             = link_to '削除', @report, data: { confirm: 'Are you sure?' }, method: :delete
 
 .row

@@ -214,6 +214,7 @@ ja:
       report: 日報
       user: ユーザ
       comment: コメント
+      group: グループ
     attributes:
       report:
         date: 日付
@@ -240,6 +241,11 @@ ja:
         content: コメント
         createed_at: 作成日時
         updated_at: 更新日時
+      group:
+        name: グループ名
+        password: パスワード
+        password_confirmation: 確認用パスワード
+        description: 説明
   views:
     pagination:
       truncate: ...

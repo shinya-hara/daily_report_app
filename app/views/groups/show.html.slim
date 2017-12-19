@@ -14,14 +14,18 @@ p
   | 管理者：
   = @group.user.username
 
-= form_for(@group, url: groups_set_path, method: :post) do |f|
-  .form-group
-    / = f.label :password
-    = f.password_field :password, class: "form-control", placeholder: "パスワードを入力してください"
+- if @group == @user.group
+  div = link_to 'このグループから退会する', groups_path,
+  data: { confirm: 'Are you sure?' }, class: "btn btn-outline-danger"
+- else
+  = form_for(@group, url: groups_set_path, method: :post) do |f|
+    .form-group
+      / = f.label :password
+      = f.password_field :password, class: "form-control", placeholder: "パスワードを入力してください"
 
-  = f.hidden_field :group_id, value: @group.id
+    = f.hidden_field :group_id, value: @group.id
 
-  = f.submit 'このグループに参加', class: "btn btn-primary"
+    = f.submit 'このグループに参加', class: "btn btn-primary"
 
 
 = link_to 'グループ一覧', groups_path

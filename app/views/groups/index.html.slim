@@ -12,7 +12,10 @@ table.table
   tbody
     - @groups.each do |group|
       tr
-        td = link_to group.name, group
+        td
+          => link_to group.name, group
+          - if group == @user.group
+            span.badge.badge-info 参加中
         td = group.users.size
         / td = link_to 'Show', group
         / td = link_to 'Edit', edit_group_path(group)

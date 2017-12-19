@@ -6,11 +6,13 @@ class GroupsController < ApplicationController
   # GET /groups.json
   def index
     @groups = Group.all
+    @user = current_user || User.new
   end
 
   # GET /groups/1
   # GET /groups/1.json
   def show
+    @user = current_user || User.new
   end
 
   # GET /groups/new

@@ -42,10 +42,10 @@ class Ability
 
     # ログインしている場合
     if user.id?
-      can :create, [Report, Group]
+      can :create, Report
+      can [:create, :set, :leave], Group
       # 作成者は更新と削除が可能
       can [:update, :destroy], [Report, Group], user_id: user.id
-      can :set, Group
     end
   end
 end

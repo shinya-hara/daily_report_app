@@ -15,8 +15,8 @@ p
   = @group.user.username
 
 - if @group == @user.group
-  div = link_to 'このグループから退会する', groups_path,
-  data: { confirm: 'Are you sure?' }, class: "btn btn-outline-danger"
+  div = link_to 'このグループから退会する', groups_leave_path,
+  data: { confirm: 'Are you sure?' }, class: "btn btn-outline-danger", method: :post
 - else
   = form_for(@group, url: groups_set_path, method: :post) do |f|
     .form-group

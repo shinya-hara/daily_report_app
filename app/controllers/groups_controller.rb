@@ -69,11 +69,15 @@ class GroupsController < ApplicationController
     if group && group.authenticate(params[:group][:password])
       # パスワードが正しい場合（グループ参加）
       current_user.update(user_params)  # ユーザの所属グループ（group_id）を変更する
-      flash[:notice] = "所属グループを変更しました"
-      redirect_to root_url
+      redirect_to root_url, notice: "「#{group.name}」に参加しました"
     else
       redirect_to group_url(params[:group][:group_id]), alert: 'パスワードが一致しません'
     end
+  end
+
+  def leave
+    current_user.update(group_id: 'null')
+    redirect_to root_url, notice: 'グループから退会しました'
   end
 
   private

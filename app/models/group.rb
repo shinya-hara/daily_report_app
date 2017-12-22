@@ -4,5 +4,5 @@ class Group < ApplicationRecord
   has_many :users
   validates :name,
     presence: true,
-    uniqueness: { scope: [:user_id], message: 'が重複しています' }
+    uniqueness: { message: 'が重複しています' }
 end

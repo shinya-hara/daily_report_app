@@ -32,6 +32,24 @@ User.create(
   )
 end
 
+# グループ
+(1..2).each do |n|
+  Group.create(
+    name: "group#{n}",
+    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip",
+    password: "password",
+    password_confirmation: "password",
+    user: User.order("RANDOM()").first,
+  )
+end
+
+# ユーザをグループに所属させる
+User.all.each do |user|
+  user.update(
+    group: Group.order("RANDOM()").first
+  )
+end
+
 # 日報
 (10..11).each do |month|
   (1..30).each do |day|

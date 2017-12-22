@@ -5,14 +5,14 @@ class ReportsController < ApplicationController
   # GET /reports
   # GET /reports.json
   def index
-    # @reports = Report.all.order(date: :desc)
-    @reports = Report.page(params[:page]).per(10).order(date: :desc)
+    @user = current_user || User.new
+    user_ids = User.joins(:group).where('group_id = ?', @user.group_id).select(:id)
+    @reports = Report.page(params[:page]).per(10).where(user_id: user_ids).includes(:user).order(date: :desc)
+    # @reports = Report.page(params[:page]).per(10).order(date: :desc)
     respond_to do |format|
       format.html
       format.js
     end
-    @user = current_user || User.new
-
   end
 
   # GET /reports/1

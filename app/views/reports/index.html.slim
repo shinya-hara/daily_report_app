@@ -1,3 +1,8 @@
+- if current_user.group.nil?
+  .alert.alert-warning
+    | グループに参加していません
+    =< link_to '[グループ管理]', groups_path
+
 h1 日報一覧
 
 #reports

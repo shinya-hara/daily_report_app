@@ -250,9 +250,10 @@ ja:
     pagination:
       truncate: ...
   unauthorized:
+    default: アクセス権限がありません
     # manage:
     #   all: "Not authorized to %{action} %{subject}."
     #   user: "Not allowed to manage other user accounts."
     create:
-      report: 続けるには、ログインまたは登録（サインアップ）が必要です。
-      group: 続けるには、ログインまたは登録（サインアップ）が必要です。
+      report: 続けるには、ログインまたは登録（サインアップ）が必要です
+      group: 続けるには、ログインまたは登録（サインアップ）が必要です

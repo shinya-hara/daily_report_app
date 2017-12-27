@@ -32,8 +32,9 @@ class Ability
     user ||= User.new
 
     # default permission
-    cannot [:create, :update, :destroy], [Report, Group]
     can :read, [Report, Group]
+    cannot [:create, :update, :destroy], [Report, Group]
+    cannot :show, Report
 
     if user.admin?
       can :access, :rails_admin
@@ -43,6 +44,9 @@ class Ability
     # ログインしている場合
     if user.id?
       can :create, Report
+      can :show, Report, user: user
+      # 同じグループに所属するユーザの日報はアクセス可能
+      can :show, Report, user: { group: user.group }
       can [:create, :set, :leave], Group
       # 作成者は更新と削除が可能
       can [:update, :destroy], [Report, Group], user_id: user.id

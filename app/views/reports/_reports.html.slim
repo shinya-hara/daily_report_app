@@ -3,7 +3,7 @@ table.table
     tr
       th 日付
       th ユーザ名
-      th グループ
+      / th グループ
       th コメント
 
   tbody
@@ -11,7 +11,7 @@ table.table
       tr
         td = link_to report.date, report_path(report)
         td = link_to report.user.username, "/users/info/#{report.user.username}"
-        td = report.user.group_id
+        / td = report.user.group_id
         td = report.comments.size
 
 / Kaminari paginator

@@ -1,17 +1,17 @@
 class ReportsController < ApplicationController
   before_action :set_report, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_user!
   load_and_authorize_resource
 
   # GET /reports
   # GET /reports.json
   def index
     @user = current_user || User.new
-    user_ids = User.joins(:group).where('group_id = ?', @user.group_id).select(:id)
-    @reports = Report.page(params[:page]).per(10).where(user_id: user_ids).includes(:user).order(date: :desc)
-    # @reports = Report.page(params[:page]).per(10).order(date: :desc)
-    respond_to do |format|
-      format.html
-      format.js
+    if @user.group_id == 0
+      @reports = Report.page(params[:page]).per(10).where(user_id: @user.id).includes(:user).order(date: :desc)
+    else
+      user_ids = User.joins(:group).where('group_id = ?', @user.group_id).select(:id)
+      @reports = Report.page(params[:page]).per(10).where(user_id: user_ids).includes(:user).order(date: :desc)
     end
   end
 

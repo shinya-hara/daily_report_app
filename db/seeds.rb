@@ -32,6 +32,7 @@ User.create(
   )
 end
 
+<<<<<<< HEAD
 # グループ
 (1..2).each do |n|
   Group.create(
@@ -50,6 +51,8 @@ User.all.each do |user|
   )
 end
 
+=======
+>>>>>>> 103b105bc44b0357e92a0cc86c13598c2a52666c
 # 日報
 (10..11).each do |month|
   (1..30).each do |day|

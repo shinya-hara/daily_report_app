@@ -46,7 +46,7 @@ class Ability
       can :create, Report
       can :show, Report, user: user
       # 同じグループに所属するユーザの日報はアクセス可能
-      can :show, Report, user: { group: user.group }
+      can :show, Report, user: { group: user.group }, private: false
       can [:create, :set, :leave], Group
       # 作成者は更新と削除が可能
       can [:update, :destroy], [Report, Group], user_id: user.id

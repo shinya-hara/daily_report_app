@@ -7,7 +7,10 @@ table.table
   tbody
     - @reports.each do |report|
       tr
-        td = link_to report.date, report_path(report)
+        td
+          - if report.private?
+            => fa_icon "lock"
+          = link_to report.date, report_path(report)
         td = report.comments.size
 
 / Kaminari paginator

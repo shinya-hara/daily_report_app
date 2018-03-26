@@ -7,11 +7,13 @@ class ReportsController < ApplicationController
   # GET /reports.json
   def index
     @user = current_user || User.new
-    if @user.group_id == 0
+    # グループに所属していない場合
+    if @user.group_id == 0 || @user.group_id.nil?
       @reports = Report.page(params[:page]).per(10).where(user_id: @user.id).includes(:user).order(date: :desc)
+    # グループに所属している場合
     else
       user_ids = User.joins(:group).where('group_id = ?', @user.group_id).select(:id)
-      @reports = Report.page(params[:page]).per(10).where(user_id: user_ids).includes(:user).order(date: :desc)
+      @reports = Report.page(params[:page]).per(10).where(user_id: user_ids, private: false).includes(:user).order(date: :desc)
     end
   end
 
@@ -19,7 +21,7 @@ class ReportsController < ApplicationController
   # GET /reports/1.json
   def show
     @user = @report.user
-    @reports = @user.reports.order(date: :desc).limit(5)
+    @reports = @user.reports.where(private: false).order(date: :desc).limit(5)
   end
 
   # GET /reports/new
@@ -85,6 +87,6 @@ class ReportsController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def report_params
-    params.require(:report).permit(:date, :content, :user_id)
+    params.require(:report).permit(:date, :content, :user_id, :private)
   end
 end

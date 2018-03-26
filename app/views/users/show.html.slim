@@ -5,6 +5,6 @@
     == render 'profile'
 
   .col-md-9.col-sm-9.col-xs-12
-    h3 日報数：#{@user.reports.size}
+    h3 日報数：#{@reports.size}
     #user_reports
       == render :partial => 'user_reports'

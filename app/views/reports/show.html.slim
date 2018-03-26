@@ -1,7 +1,10 @@
 - content_for :report_title
   .jumbotron.jumbotron-fluid
     .container
-      h2 #{@report.date}の日報
+      h2
+        - if @report.private?
+          => fa_icon 'lock'
+        | #{@report.date}の日報
       .clearfix
         .float-left
           = link_to gravatar_for(@user, size: 30, fullwidth: false), "/users/info/#{@user.username}"
@@ -56,7 +59,7 @@
       = link_to gravatar_for(@user, size: 80, fullwidth: false), "/users/info/#{@user.username}"
       .
         strong = link_to @user.username, "/users/info/#{@user.username}"
-        . 日報数：#{@user.reports.size}
+        . 日報数：#{@reports.size}
         hr
       .
         h5 最近の日報

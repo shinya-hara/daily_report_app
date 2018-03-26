@@ -17,6 +17,12 @@
     = f.label :content
     = f.text_area :content, rows: 25, spellcheck: false, placeholder: '今日はどんな仕事をしましたか？', class: "form-control"
 
+  .form-group
+    .form-check
+      = f.check_box :private
+      =< f.label :private, '非公開に設定する'
+      .alert.alert-warning 非公開に設定した日報はマイページから確認できます
+
   = f.hidden_field :user_id
 
   = f.submit class: "btn btn-primary"

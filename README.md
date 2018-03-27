@@ -1,116 +1,18 @@
-# Daily Report App
+Daily Report App（日報管理アプリ）
+====
 
-Ruby on Railsで開発中の「日報アプリ」
+[Daily Report App](https://warm-basin-85336.herokuapp.com/)は、日々の進捗や作業内容をまとめる日報を管理するサービスです。
 
+# Description
+ユーザは自身の日報を作成したり、他ユーザが作成した日報を閲覧し、コメントすることができます。ユーザは任意のグループに所属することができ、同グループに所属しているユーザの日報のみが閲覧可能です（グループに所属していない場合、他ユーザから作成した日報を見られることはありません）。
 
-## 主要なGem
+## Link
+アクセスはこちらから → [Daily Report App](https://warm-basin-85336.herokuapp.com/)
 
-- devise
-- cancancan
-- rails_admin
-- kaminari
-- slim-rails
+## Licence
 
-### devise
-ログイン認証機能を提供する
+[MIT](https://github.com/shinya-hara/Questans/blob/master/LICENSE)
 
-*deviseのインストール*
-~~~
-rails g devise:install
-~~~
+## Author
 
-*ログイン認証用のファイル生成*
-~~~
-rails g devise User
-~~~
-
-
-### cancancan
-権限管理
-
-### rails_admin
-管理者画面を作成  
-deviseを利用しているため、deviseは必須
-
-*rails_adminのインストール*
-~~~
-rails g rails_admin:install
-rails db:migrate
-~~~
-
-### kaminari
-ページネーション機能を提供  
-
-*reports_controller.rb を編集*
-~~~rb
-class ReportsController < ApplicationController
-  def index
-    @reports = Report.page(params[:page]).per(10).order(date: :desc)
-    respond_to do |format|
-      format.html
-      format.js
-    end
-    @user = current_user || User.new
-  end
-end
-~~~
-~~~rb
-@reports = Report.page(params[:page])
-~~~
-基本はこれでOK  
-`.per(10)`で1ページ10件表示  
-順番は`.order(date: :desc)`などで指定
-
-*index.html.slim を編集*
-~~~rb
-= paginate @reports
-~~~
-
-Viewを変更する際は `rails g kaminari:views default` を実行  
-`app/views/kaminari/`以下にviewが生成される  
-`default`はテーマを指していて、`bootstrap4`や`google`などが指定可能（らしいが`bootstrap4`は失敗した）
-
-### slim-rails
-slimとは、可読性を保ちつつ、コード量を減らせるテンプレートエンジン  
-Railsのデフォルトはerb  
-パフォーマンスは、erb/hamlより優秀
-
-*application.html.erb*
-~~~html
-<!DOCTYPE html>
-<html>
-<head>
-  <title>SlimTest</title>
-  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
-  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
-  <%= csrf_meta_tags %>
-</head>
-<body>
-
-<header id="header">
-  <h1 class="title logo">Slim Test</h1>
-</header>
-
-<%= yield %>
-
-</body>
-</html>
-~~~
-slimで書き直すと
-~~~rb
-DOCTYPE
-html
-  head
-    title SlimTest
-    = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true
-    = javascript_include_tag 'application', 'data-turbolinks-track' => true
-    = csrf_meta_tags
-
-  body
-
-    header#header
-      h1.title.logo Slim Test
-
-    == yield
-~~~
-スッキリ
+[shinya-hara](https://github.com/shinya-hara)

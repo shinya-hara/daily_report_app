@@ -6,7 +6,7 @@
     - if can? :update, @group
       => link_to '編集', edit_group_path(@group)
     - if can? :destroy, @group
-      = link_to '削除', @group, data: { confirm: 'Are you sure?' }, method: :delete
+      = link_to '削除', @group, data: { confirm: "グループを削除すると、「#{@group.name}」に所属していたユーザは未所属になります。削除しますか？" }, method: :delete
 
 p = @group.description
 
@@ -16,7 +16,7 @@ p
 
 - if @group == @user.group
   div = link_to 'このグループから退会する', groups_leave_path,
-  data: { confirm: 'Are you sure?' }, class: "btn btn-outline-danger", method: :post
+  data: { confirm: "「#{@group.name}」から退会しますか？" }, class: "btn btn-outline-danger", method: :post
 - else
   = form_for(@group, url: groups_set_path, method: :post) do |f|
     .form-group

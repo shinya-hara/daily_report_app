@@ -1,3 +1,7 @@
+- if current_user.group.nil?
+  .alert.alert-warning
+    | グループに参加していません
+
 h1 グループ一覧
 
 table.table
@@ -5,9 +9,6 @@ table.table
     tr
       th グループ名
       th 参加者数
-      / th
-      / th
-      / th
 
   tbody
     - @groups.each do |group|
@@ -17,11 +18,6 @@ table.table
           - if group == @user.group
             span.badge.badge-info 参加中
         td = group.users.size
-        / td = link_to 'Show', group
-        / td = link_to 'Edit', edit_group_path(group)
-        / td = link_to 'Destroy', group, data: { confirm: 'Are you sure?' }, method: :delete
-
-
 
 - if can? :create, Group
   = link_to 'グループを作成する', new_group_path, class: 'btn btn-primary'

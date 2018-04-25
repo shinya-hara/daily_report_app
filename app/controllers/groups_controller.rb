@@ -57,6 +57,8 @@ class GroupsController < ApplicationController
   # DELETE /groups/1
   # DELETE /groups/1.json
   def destroy
+    users = User.where(group: @group)
+    users.update(group_id: nil)
     @group.destroy
     respond_to do |format|
       format.html { redirect_to groups_url, notice: 'グループを削除しました' }
@@ -76,7 +78,7 @@ class GroupsController < ApplicationController
   end
 
   def leave
-    current_user.update(group_id: 'null')
+    current_user.update(group_id: nil)
     redirect_to root_url, notice: 'グループから退会しました'
   end
 

@@ -1,7 +1,6 @@
 class User < ApplicationRecord
   has_many :reports
   has_many :comments
-  has_one :group
   belongs_to :group, optional: true
   attr_accessor :login
   # Include default devise modules. Others available are:

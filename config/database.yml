@@ -21,5 +21,12 @@ test:
   database: db/test.sqlite3
 
 production:
-  <<: *default
-  database: db/production.sqlite3
+  # <<: *default
+  # database: db/production.sqlite3
+  adapter: mysql2
+  encoding: utf8
+  pool: 5
+  database: daily_report_app
+  username: <%= Rails.application.secrets[:db_user] %>
+  password: <%= Rails.application.secrets[:db_password] %>
+  socket: /var/lib/mysql/mysql.sock
